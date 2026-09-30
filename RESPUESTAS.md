@@ -1,6 +1,6 @@
 # Respuestas — Deber 1
 
-> **Estado de la evidencia:** el código está preparado, pero no se pudo completar `flutter create`/`flutter pub get` en este entorno: el comando de Flutter quedó sin salida y se detuvo. No se ejecutaron las apps ni se probó un teléfono. Por eso, las explicaciones conceptuales están respondidas y las preguntas que piden una observación real quedan señaladas para sustituirlas por lo que veas en tu dispositivo. No afirmo resultados de ejecución que no ocurrieron.
+> **Estado de la evidencia:** se generaron los proyectos y dependencias. Los cuatro proyectos pasaron `flutter analyze` y `flutter build web`. No se abrió la app en un teléfono; por eso quedan pendientes la observación de navegación/conectividad en un dispositivo y el video `demo.mp4`. Las respuestas describen el comportamiento esperado por el código, sin atribuir pruebas de teléfono que no ocurrieron.
 
 ## Parte A — Estado
 
@@ -30,10 +30,10 @@ git diff version/setstate version/bloc -- parte_a_contador/lib/domain parte_a_co
 (sin salida)
 
 git diff version/setstate version/bloc --stat -- parte_a_contador/lib/presentation
- .../lib/presentation/estado/contador_cubit.dart    | 29 +++++++++++++
- .../presentation/pantallas/pantalla_control.dart   | 44 +++++---------------
- .../lib/presentation/pantallas/pantalla_visor.dart | 47 ++++------------------
- 3 files changed, 47 insertions(+), 73 deletions(-)
+ .../lib/presentation/estado/contador_cubit.dart    | 35 +++++++++++
+ .../presentation/pantallas/pantalla_control.dart   | 73 +++++++++-------------
+ .../lib/presentation/pantallas/pantalla_visor.dart | 72 +++++++--------------
+ 3 files changed, 87 insertions(+), 93 deletions(-)
 ```
 
 Los dos primeros diffs vacíos muestran que las tres versiones conservan la misma lógica de dominio y acceso a datos; el tercero muestra que la implementación intercambiable está en `presentation/`. Para cambiar Riverpod por otro administrador de estado se reescribiría `presentation/` y el cableado correspondiente de `main.dart`, no `domain/` ni `data/`.
@@ -54,13 +54,13 @@ Para una sola pantalla y estado local sencillo elegiría `setState`: tiene menos
 | ¿Qué pasa con el botón atrás? | Puede dejar el Visor mostrando su copia vieja si Control se cierra sin devolver valor. | El estado compartido sigue actualizado y el Visor lo observa. | El estado del Cubit sigue actualizado y el Visor lo observa. |
 | ¿Tuviste que tocar `domain/`? | No | No | No |
 
-> Las filas describen el comportamiento esperado por el código. Falta validarlas en ejecución en el dispositivo.
+> Las filas describen el comportamiento esperado por el código; falta confirmarlo al usar la app.
 
 ## Parte B — Future y Stream
 
 ### 6. La foto de conectividad
 
-La consulta Future devuelve el estado que el sistema reportó en el instante de esa consulta. Al apagar Wi-Fi después, la pantalla conserva ese resultado y su hora; no ha recibido otra consulta, así que es un dato correcto de un momento anterior, no una lectura actualizada automáticamente. Al pulsar de nuevo, solicita otra foto.
+La consulta Future devuelve el estado que el sistema reportó en el instante de esa consulta. Al apagar Wi-Fi después, la pantalla conserva ese resultado y su hora; no ha recibido otra consulta, así que es un dato correcto de un momento anterior, no una lectura actualizada automáticamente. Al pulsar de nuevo, solicita otra foto. Esta explicación sigue la implementación; falta observarlo en un teléfono.
 
 ### 7. Cancelar la suscripción
 
