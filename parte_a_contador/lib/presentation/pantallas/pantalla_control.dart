@@ -10,13 +10,20 @@ class PantallaControl extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final contador = ref.watch(contadorProvider);
     final acciones = ref.read(contadorProvider.notifier);
-    return Scaffold(appBar: AppBar(title: const Text('Control')),
-      body: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-        Text('Contador: $contador', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 16),
-        FilledButton(onPressed: acciones.incrementar, child: const Text('+1')),
-        FilledButton(onPressed: acciones.decrementar, child: const Text('-1')),
-        OutlinedButton(onPressed: () => Navigator.pop(context), child: const Text('Volver')),
-      ])));
+    return Scaffold(
+        appBar: AppBar(title: const Text('Control')),
+        body: Center(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text('Contador: $contador',
+              style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 16),
+          FilledButton(
+              onPressed: acciones.incrementar, child: const Text('+1')),
+          FilledButton(
+              onPressed: acciones.decrementar, child: const Text('-1')),
+          OutlinedButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Volver')),
+        ])));
   }
 }

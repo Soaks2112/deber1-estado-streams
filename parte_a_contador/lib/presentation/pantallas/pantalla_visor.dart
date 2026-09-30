@@ -10,11 +10,18 @@ class PantallaVisor extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final contador = ref.watch(contadorProvider);
-    return Scaffold(appBar: AppBar(title: const Text('Visor')),
-      body: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-        Text('Contador: $contador', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 24),
-        FilledButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const PantallaControl())), child: const Text('Ir a Control')),
-      ])));
+    return Scaffold(
+        appBar: AppBar(title: const Text('Visor')),
+        body: Center(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text('Contador: $contador',
+              style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 24),
+          FilledButton(
+              onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                      builder: (_) => const PantallaControl())),
+              child: const Text('Ir a Control')),
+        ])));
   }
 }
