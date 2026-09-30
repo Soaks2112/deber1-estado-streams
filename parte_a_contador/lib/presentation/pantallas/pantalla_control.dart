@@ -4,7 +4,11 @@ import '../../domain/usecases/decrementar.dart';
 import '../../domain/usecases/incrementar.dart';
 
 class PantallaControl extends StatefulWidget {
-  const PantallaControl({super.key, required this.inicial, required this.incrementar, required this.decrementar});
+  const PantallaControl(
+      {super.key,
+      required this.inicial,
+      required this.incrementar,
+      required this.decrementar});
   final int inicial;
   final Incrementar incrementar;
   final Decrementar decrementar;
@@ -31,12 +35,22 @@ class _PantallaControlState extends State<PantallaControl> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Control')),
-        body: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text('Contador: $_contador', style: Theme.of(context).textTheme.headlineMedium),
+        body: Center(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text('Contador: $_contador',
+              style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 16),
-          FilledButton(onPressed: _ocupado ? null : () => _cambiar(widget.incrementar.call), child: const Text('+1')),
-          FilledButton(onPressed: _ocupado ? null : () => _cambiar(widget.decrementar.call), child: const Text('-1')),
-          OutlinedButton(onPressed: () => Navigator.pop(context, _contador), child: const Text('Volver')),
+          FilledButton(
+              onPressed:
+                  _ocupado ? null : () => _cambiar(widget.incrementar.call),
+              child: const Text('+1')),
+          FilledButton(
+              onPressed:
+                  _ocupado ? null : () => _cambiar(widget.decrementar.call),
+              child: const Text('-1')),
+          OutlinedButton(
+              onPressed: () => Navigator.pop(context, _contador),
+              child: const Text('Volver')),
         ])),
       );
 }
