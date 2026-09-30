@@ -8,11 +8,18 @@ import 'presentation/pantallas/pantalla_visor.dart';
 
 void main() {
   final repository = ContadorPrefsRepository();
-  runApp(ContadorApp(obtener: ObtenerContador(repository), incrementar: Incrementar(repository), decrementar: Decrementar(repository)));
+  runApp(ContadorApp(
+      obtener: ObtenerContador(repository),
+      incrementar: Incrementar(repository),
+      decrementar: Decrementar(repository)));
 }
 
 class ContadorApp extends StatelessWidget {
-  const ContadorApp({super.key, required this.obtener, required this.incrementar, required this.decrementar});
+  const ContadorApp(
+      {super.key,
+      required this.obtener,
+      required this.incrementar,
+      required this.decrementar});
   final ObtenerContador obtener;
   final Incrementar incrementar;
   final Decrementar decrementar;
@@ -20,7 +27,12 @@ class ContadorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Contador',
-        theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo), useMaterial3: true),
-        home: PantallaVisor(obtener: obtener, incrementar: incrementar, decrementar: decrementar),
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+            useMaterial3: true),
+        home: PantallaVisor(
+            obtener: obtener,
+            incrementar: incrementar,
+            decrementar: decrementar),
       );
 }
