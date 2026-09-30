@@ -1,14 +1,14 @@
 # Respuestas — Deber 1
 
-> **Estado de la evidencia:** se generaron los proyectos y dependencias. Los cuatro proyectos pasaron `flutter analyze` y `flutter build web`. No se abrió la app en un teléfono; por eso quedan pendientes la observación de navegación/conectividad en un dispositivo y el video `demo.mp4`. Las respuestas describen el comportamiento esperado por el código, sin atribuir pruebas de teléfono que no ocurrieron.
+> **Estado de la evidencia:** los cuatro proyectos pasaron `flutter analyze` y `flutter build web`. La Parte B sí se probó en un Redmi Note 7: Future mantuvo una lectura obsoleta y Stream reflejó el cambio de Wi-Fi. Se grabó `demo.mp4` durante 18 segundos. Las pruebas de navegación del contador en Parte A siguen pendientes.
 
 ## Parte A — Estado
 
 ### 1. `setState` y el botón atrás del sistema
 
-El incremento se guarda en SharedPreferences, así que el valor persistido sí cambia. Lo que queda desactualizado es el `int _contador` que conserva el `State` de la pantalla Visor: al salir de Control con el botón del sistema, la ruta se cierra sin devolver el valor y el Visor no vuelve a leer el repositorio. La pantalla sigue mostrando su copia anterior hasta que se recargue.
+El código guarda el incremento en SharedPreferences, así que el valor persistido cambia. Lo que quedaría desactualizado es el `int _contador` que conserva el `State` de la pantalla Visor: al salir de Control con el botón del sistema, la ruta se cierra sin devolver el valor y el Visor no vuelve a leer el repositorio. La pantalla conserva su copia anterior hasta que se recargue. No probé esta navegación de Parte A en el teléfono.
 
-Para coordinar el dato se ponen de acuerdo al menos tres puntos: el Visor que pasa el valor y espera el resultado; Control, que recibe el valor y lo devuelve; y la navegación que lleva y recoge ese resultado. `main.dart` además conecta los casos de uso al Visor. **Pendiente de confirmar visualmente** al hacer la prueba del botón atrás.
+Para coordinar el dato se ponen de acuerdo al menos tres puntos: el Visor que pasa el valor y espera el resultado; Control, que recibe el valor y lo devuelve; y la navegación que lleva y recoge ese resultado. `main.dart` además conecta los casos de uso al Visor.
 
 ### 2. Riverpod y el botón atrás
 
@@ -16,7 +16,7 @@ El contador vive en el estado compartido de `ContadorNotifier`, expuesto por `co
 
 ### 3. `BlocObserver`
 
-El observer permite ver en consola la secuencia de estados emitidos, por ejemplo `ContadorCubit: 3 -> 4`, incluso cuando el cambio se origina desde otra pantalla. Sirve para rastrear errores reportados por usuarios, reconstruir el orden de acciones o revisar una transición inesperada durante depuración. **Pendiente de comprobar la salida real de la consola.**
+El observer permite ver en consola la secuencia de estados emitidos, por ejemplo `ContadorCubit: 3 -> 4`, incluso cuando el cambio se origina desde otra pantalla. Sirve para rastrear errores reportados por usuarios, reconstruir el orden de acciones o revisar una transición inesperada durante depuración. La compilación y análisis están verificados; no ejecuté Parte A para observar la consola.
 
 ### 4. Comparación Git
 
@@ -60,7 +60,7 @@ Para una sola pantalla y estado local sencillo elegiría `setState`: tiene menos
 
 ### 6. La foto de conectividad
 
-La consulta Future devuelve el estado que el sistema reportó en el instante de esa consulta. Al apagar Wi-Fi después, la pantalla conserva ese resultado y su hora; no ha recibido otra consulta, así que es un dato correcto de un momento anterior, no una lectura actualizada automáticamente. Al pulsar de nuevo, solicita otra foto. Esta explicación sigue la implementación; falta observarlo en un teléfono.
+En el Redmi consulté con Wi-Fi encendido: la pantalla mostró “Wi‑Fi” y la hora `23:53:05`. Apagué Wi‑Fi y la captura aún mostraba “Wi‑Fi” con esa misma hora. El dato era correcto para el momento de consulta, pero estaba desactualizado; al volver a pulsar “Consultar ahora” se solicita una nueva foto.
 
 ### 7. Cancelar la suscripción
 
@@ -68,7 +68,7 @@ Sin cancelar, la suscripción puede seguir reteniendo al Cubit y escuchando even
 
 ### 8. Foto y película
 
-Con Future, la pestaña consulta una vez y muestra, por ejemplo, Wi-Fi. Si se apaga el Wi-Fi, la etiqueta permanece en Wi-Fi hasta que alguien vuelva a pulsar Consultar. Con Stream, el Cubit escucha los cambios del sistema: al apagar Wi-Fi debe actualizar la vista automáticamente a Sin conexión o Datos móviles, y al encenderlo debe volver a mostrar Wi-Fi. **Esta prueba con el teléfono y el video de 15–20 segundos están pendientes.**
+Con Future vi que la etiqueta y hora quedaron iguales al apagar Wi‑Fi. En Stream, la pantalla cambió sola de Wi‑Fi a “Sin conexión”; la probé además dos veces y el contador de cambios aumentó. `demo.mp4` muestra la prueba de 18 segundos. En este teléfono, sin datos móviles disponibles, el resultado al apagar Wi‑Fi fue “Sin conexión”.
 
 En una app pediría con Future una lista de productos al abrir una búsqueda y el detalle de una orden. Observaría con Stream la ubicación GPS mientras se navega y los mensajes nuevos de un chat.
 
