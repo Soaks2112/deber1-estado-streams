@@ -9,3 +9,9 @@ build/
 coverage/
 parte_a_contador/.metadata
 parte_b_conexion/.metadata
+
+.dart-appdata/
+.pub-cache/
+
+.dart-appdata/
+.pub-cache/

@@ -16,12 +16,15 @@ class ConexionCubit extends Cubit<EstadoConexion> {
 
   Future<void> iniciar() async {
     emit(await _consultar());
-    _suscripcion = _observar().listen((estado) {
-      _cambios++;
-      emit(estado);
-    }, onError: (Object error, StackTrace stack) {
-      addError(error, stack);
-    });
+    _suscripcion = _observar().listen(
+      (estado) {
+        _cambios++;
+        emit(estado);
+      },
+      onError: (Object error, StackTrace stack) {
+        addError(error, stack);
+      },
+    );
   }
 
   @override
