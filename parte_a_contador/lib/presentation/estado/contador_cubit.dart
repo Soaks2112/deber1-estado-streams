@@ -5,8 +5,14 @@ import '../../domain/usecases/incrementar.dart';
 import '../../domain/usecases/obtener_contador.dart';
 
 class ContadorCubit extends Cubit<int> {
-  ContadorCubit({required ObtenerContador obtener, required Incrementar incrementar, required Decrementar decrementar})
-      : _obtener = obtener, _incrementar = incrementar, _decrementar = decrementar, super(0);
+  ContadorCubit({
+    required ObtenerContador obtener,
+    required Incrementar incrementar,
+    required Decrementar decrementar,
+  }) : _obtener = obtener,
+       _incrementar = incrementar,
+       _decrementar = decrementar,
+       super(0);
 
   final ObtenerContador _obtener;
   final Incrementar _incrementar;

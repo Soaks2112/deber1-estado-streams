@@ -8,10 +8,27 @@ class PantallaVisor extends StatelessWidget {
   const PantallaVisor({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Visor')),
-        body: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-          BlocBuilder<ContadorCubit, int>(builder: (context, contador) => Text('Contador: $contador', style: Theme.of(context).textTheme.headlineMedium)),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Visor')),
+    body: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          BlocBuilder<ContadorCubit, int>(
+            builder: (context, contador) => Text(
+              'Contador: $contador',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ),
           const SizedBox(height: 24),
-          FilledButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const PantallaControl())), child: const Text('Ir a Control')),
-        ])));
+          FilledButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const PantallaControl()),
+            ),
+            child: const Text('Ir a Control'),
+          ),
+        ],
+      ),
+    ),
+  );
 }
