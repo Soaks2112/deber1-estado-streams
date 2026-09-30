@@ -7,7 +7,11 @@ import '../../domain/usecases/observar_conexion.dart';
 import '../estado/conexion_cubit.dart';
 
 class PantallaStream extends StatelessWidget {
-  const PantallaStream({super.key, required this.consultar, required this.observar});
+  const PantallaStream({
+    super.key,
+    required this.consultar,
+    required this.observar,
+  });
   final ConsultarConexion consultar;
   final ObservarConexion observar;
 
@@ -24,12 +28,26 @@ class PantallaStream extends StatelessWidget {
         child: BlocBuilder<ConexionCubit, EstadoConexion>(
           builder: (context, estado) {
             final conectado = estado != EstadoConexion.sinConexion;
-            return Center(child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Icon(conectado ? Icons.wifi : Icons.wifi_off, size: 56, color: conectado ? Colors.green : Colors.red),
-              Text(_nombre(estado), style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: 10),
-              Text('Cambios recibidos: ${context.read<ConexionCubit>().cambios}'),
-            ]));
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    conectado ? Icons.wifi : Icons.wifi_off,
+                    size: 56,
+                    color: conectado ? Colors.green : Colors.red,
+                  ),
+                  Text(
+                    _nombre(estado),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Cambios recibidos: ${context.read<ConexionCubit>().cambios}',
+                  ),
+                ],
+              ),
+            );
           },
         ),
       );
