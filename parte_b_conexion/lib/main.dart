@@ -30,10 +30,9 @@ class _ConexionAppState extends State<ConexionApp> {
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal), useMaterial3: true),
         home: Scaffold(
           appBar: AppBar(title: Text(_indice == 0 ? 'Con Future' : 'Con Stream')),
-          body: IndexedStack(index: _indice, children: [
-            PantallaFoto(consultar: widget.consultar),
-            PantallaStream(consultar: widget.consultar, observar: widget.observar),
-          ]),
+          body: _indice == 0
+              ? PantallaFoto(consultar: widget.consultar)
+              : PantallaStream(consultar: widget.consultar, observar: widget.observar),
           bottomNavigationBar: NavigationBar(selectedIndex: _indice, onDestinationSelected: (value) => setState(() => _indice = value), destinations: const [
             NavigationDestination(icon: Icon(Icons.photo), label: 'Con Future'),
             NavigationDestination(icon: Icon(Icons.movie), label: 'Con Stream'),
