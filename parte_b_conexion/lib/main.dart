@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 import 'data/repositories/conexion_plus_repository.dart';
@@ -8,7 +7,7 @@ import 'presentation/pantallas/pantalla_foto.dart';
 import 'presentation/pantallas/pantalla_stream.dart';
 
 void main() {
-  final repository = ConexionPlusRepository(Connectivity());
+  final repository = ConexionPlusRepository();
   runApp(
     ConexionApp(
       consultar: ConsultarConexion(repository),

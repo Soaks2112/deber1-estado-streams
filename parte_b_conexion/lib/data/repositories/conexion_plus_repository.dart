@@ -4,7 +4,7 @@ import '../../domain/entities/estado_conexion.dart';
 import '../../domain/repositories/conexion_repository.dart';
 
 class ConexionPlusRepository implements ConexionRepository {
-  ConexionPlusRepository(this._connectivity);
+  ConexionPlusRepository() : _connectivity = Connectivity();
   final Connectivity _connectivity;
 
   EstadoConexion _traducir(List<ConnectivityResult> estados) {
