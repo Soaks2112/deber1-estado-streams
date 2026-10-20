@@ -12,10 +12,6 @@ class ConexionPlusRepository implements ConexionRepository {
     if (estados.contains(ConnectivityResult.mobile)) {
       return EstadoConexion.datosMoviles;
     }
-    if (estados.contains(ConnectivityResult.ethernet) ||
-        estados.contains(ConnectivityResult.vpn)) {
-      return EstadoConexion.otro;
-    }
     return EstadoConexion.sinConexion;
   }
 
