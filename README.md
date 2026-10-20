@@ -6,6 +6,17 @@ Corre `flutter pub get` y luego `flutter run` desde el proyecto que quieras prob
 
 La revisión incluye análisis estático, compilación web y pruebas automáticas de navegación del contador y cierre de la suscripción. Consulta [RESPUESTAS.md](RESPUESTAS.md) para las ocho respuestas, las tablas y las limitaciones de la evidencia.
 
+Resultados de la revisión del 20 de octubre de 2026:
+
+| Versión | `flutter analyze` | Pruebas | Compilación web |
+|---|---|---|---|
+| Parte A: setState | Sin errores | 2 aprobadas | Correcta |
+| Parte A: Riverpod | Sin errores | 2 aprobadas | Correcta |
+| Parte A: Cubit | Sin errores | 2 aprobadas | Correcta |
+| Parte B | Sin errores | 2 aprobadas | Correcta |
+
+`main` contiene el mismo código de aplicación que `version/setstate`. Los dos diffs de `domain/` y `data/` entre las tres variantes están vacíos. La compilación Android y las pruebas físicas no se repitieron en esta revisión.
+
 Para ejecutar las pruebas:
 
 ```powershell
