@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/repositories/contador_prefs_repository.dart';
-import 'domain/usecases/decrementar.dart';
-import 'domain/usecases/incrementar.dart';
-import 'domain/usecases/obtener_contador.dart';
 import 'presentation/estado/contador_provider.dart';
 import 'presentation/pantallas/pantalla_visor.dart';
 
 void main() {
   final repository = ContadorPrefsRepository();
   runApp(ProviderScope(overrides: [
-    obtenerContadorProvider.overrideWithValue(ObtenerContador(repository)),
-    incrementarProvider.overrideWithValue(Incrementar(repository)),
-    decrementarProvider.overrideWithValue(Decrementar(repository)),
+    contadorRepositoryProvider.overrideWithValue(repository),
   ], child: const ContadorApp()));
 }
 
