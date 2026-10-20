@@ -4,4 +4,22 @@ El repositorio contiene dos proyectos Flutter independientes con sus carpetas de
 
 Corre `flutter pub get` y luego `flutter run` desde el proyecto que quieras probar. Para la comparación A, selecciona la rama correspondiente antes de ejecutar `parte_a_contador`.
 
-Los cuatro proyectos pasaron `flutter analyze` y `flutter build web`. La Parte B se probó en un Redmi Note 7: Future conservó la lectura anterior al apagar Wi-Fi y Stream cambió solo a “Sin conexión”. El video de 18 segundos está en [demo.mp4](demo.mp4). Las pruebas de navegación de Parte A quedan pendientes. Consulta [RESPUESTAS.md](RESPUESTAS.md) para el registro de las respuestas y observaciones.
+La revisión incluye análisis estático, compilación web y pruebas automáticas de navegación del contador y cierre de la suscripción. Consulta [RESPUESTAS.md](RESPUESTAS.md) para las ocho respuestas, las tablas y las limitaciones de la evidencia.
+
+Para ejecutar las pruebas:
+
+```powershell
+cd parte_a_contador
+flutter pub get
+flutter test # Riverpod o Cubit
+flutter test --dart-define=SETSTATE=true # main o version/setstate
+cd ../parte_b_conexion
+flutter pub get
+flutter test
+```
+
+En Riverpod se usa `NotifierProvider` con `Notifier`, siguiendo la [guía oficial de migración](https://riverpod.dev/docs/migration/from_state_notifier). El repositorio concreto se inyecta desde `main.dart`; los providers solo conocen el contrato del dominio.
+
+**Pendiente antes de entregar:** sustituir [demo.mp4](demo.mp4) por una grabación real de 15–20 segundos donde la pestaña “Con Stream” cambie de Wi-Fi a Sin conexión y vuelva a Wi-Fi sin pulsar la app. El archivo actual dura 17,95 segundos, pero todos sus fotogramas muestran Wi-Fi: no satisface ese requisito. También debe verificarse la persistencia al cerrar la app por completo en el teléfono; las pruebas de widgets utilizan almacenamiento simulado.
+
+El repositorio de GitHub es privado. Para que el docente pueda revisarlo, necesita acceso al repositorio.
