@@ -12,12 +12,19 @@ class ConexionCubit extends Cubit<EstadoConexion> {
   final ObservarConexion _observar;
   StreamSubscription<EstadoConexion>? _suscripcion;
   int _cambios = 0;
+  bool _iniciado = false;
+  bool _cerrando = false;
   int get cambios => _cambios;
 
   Future<void> iniciar() async {
-    emit(await _consultar());
+    if (_iniciado || _cerrando || isClosed) return;
+    _iniciado = true;
+    final inicial = await _consultar();
+    if (_cerrando || isClosed) return;
+    emit(inicial);
     _suscripcion = _observar().listen(
       (estado) {
+        if (_cerrando || isClosed || estado == state) return;
         _cambios++;
         emit(estado);
       },
@@ -29,6 +36,7 @@ class ConexionCubit extends Cubit<EstadoConexion> {
 
   @override
   Future<void> close() async {
+    _cerrando = true;
     await _suscripcion?.cancel();
     await super.close();
   }
